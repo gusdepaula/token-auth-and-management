@@ -6,12 +6,26 @@ export const authService = {
     return HttpClient(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`, {
       method: 'POST',
       body: { username, password },
-    }).then(async res => {
-      if (!res.ok) throw new Error('Usuário ou senha inválidos');
-      const body = await res.body;
+    })
+      .then(async res => {
+        if (!res.ok) throw new Error('Usuário ou senha inválidos');
+        const body = await res.body;
 
-      tokenService.save(body.data.access_token);
-    });
+        tokenService.save(body.data.access_token);
+        return body;
+      })
+      .then(async ({ data }) => {
+        const { refresh_token } = data;
+
+        const response = await HttpClient('/api/refresh', {
+          method: 'POST',
+          body: {
+            refresh_token,
+          },
+        });
+
+        console.log(response);
+      });
   },
   async getSession(ctx = null) {
     const token = tokenService.get(ctx);
