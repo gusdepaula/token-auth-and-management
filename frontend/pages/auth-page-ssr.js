@@ -1,26 +1,23 @@
-import { withSession } from "../src/services/auth/session";
+import { withSession } from '../src/services/auth/session';
 
 function AuthPageSSR(props) {
-    
-    return(
-        <div>
-            <h1>Auth Page Server Side Render</h1>
-                <pre>
-                {JSON.stringify(props, null, 2)}
-            </pre>
-        </div>
-    )
+  return (
+    <div>
+      <h1>Auth Page Server Side Render</h1>
+      <pre>{JSON.stringify(props, null, 2)}</pre>
+    </div>
+  );
 }
 
 export default AuthPageSSR;
 
 export const getServerSideProps = withSession((ctx) => {
-    return {
-        props: {
-            session: ctx.req.session,
-        }
-    }
-}) 
+  return {
+    props: {
+      session: ctx.req.session,
+    },
+  };
+});
 
 // export async function getServerSideProps(ctx) {
 //     try {

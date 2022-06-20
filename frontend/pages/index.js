@@ -1,12 +1,12 @@
-import React from "react";
-import { Router, useRouter } from "next/router";
-import { authService } from "../src/services/auth/authService";
+import React from 'react';
+import { Router, useRouter } from 'next/router';
+import { authService } from '../src/services/auth/authService';
 
 export default function HomeScreen() {
   const router = useRouter();
   const [values, setValues] = React.useState({
-    usuario: "omariosouto",
-    senha: "safepassword",
+    usuario: 'omariosouto',
+    senha: 'safepassword',
   });
 
   function handleChange(event) {
@@ -31,12 +31,12 @@ export default function HomeScreen() {
               password: values.senha,
             })
             .then(() => {
-              router.push("/auth-page-static");
+              router.push('/auth-page-static');
               // router.push('/auth-page-ssr');
             })
             .catch((err) => {
               console.error(err);
-              console.log("Usuário ou senha estão inválidos");
+              console.log('Usuário ou senha estão inválidos');
             });
         }}
       >

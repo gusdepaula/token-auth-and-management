@@ -1,6 +1,6 @@
-import { useRouter } from "next/router";
-import React from "react";
-import { authService } from "./authService";
+import { useRouter } from 'next/router';
+import React from 'react';
+import { authService } from './authService';
 
 export function withSession(fn) {
   return async (ctx) => {
@@ -11,7 +11,7 @@ export function withSession(fn) {
         req: {
           ...ctx.req,
           session: {
-            name: "Nome do usuário",
+            name: 'Nome do usuário',
           },
         },
       };
@@ -20,7 +20,7 @@ export function withSession(fn) {
       return {
         redirect: {
           permament: false,
-          destination: "/?error=401",
+          destination: '/?error=401',
         },
       };
     }
@@ -60,8 +60,8 @@ export function withSessionHOC(Component) {
     const session = useSession();
     const router = useRouter();
     if (session.loading && session.error) {
-      console.log("redireciona o usuário para home");
-      router.push("/?error=401");
+      console.log('redireciona o usuário para home');
+      router.push('/?error=401');
     }
     const modifiedProps = {
       ...props,
