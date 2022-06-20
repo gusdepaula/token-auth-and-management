@@ -1,5 +1,6 @@
 import nookies from 'nookies';
 import { HttpClient } from '../../src/infra/HttpClient/HttpClient';
+import { tokenService } from '../../src/services/auth/tokenService';
 
 const REFRESH_TOKEN_NAME = 'REFRESH_TOKEN_NAME';
 
@@ -52,6 +53,8 @@ const controllers = {
           sameSite: 'lax',
         }
       );
+
+      tokenService.save(refreshResponse.body.data.access_token, ctx);
 
       res.json({
         refreshResponse,
