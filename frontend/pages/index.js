@@ -12,7 +12,7 @@ export default function HomeScreen() {
   function handleChange(event) {
     const fieldValue = event.target.value;
     const fieldName = event.target.name;
-    setValues((currentValues) => {
+    setValues(currentValues => {
       return {
         ...currentValues,
         [fieldName]: fieldValue,
@@ -23,7 +23,7 @@ export default function HomeScreen() {
     <div>
       <h1>Login</h1>
       <form
-        onSubmit={(event) => {
+        onSubmit={event => {
           event.preventDefault();
           authService
             .login({
@@ -31,10 +31,10 @@ export default function HomeScreen() {
               password: values.senha,
             })
             .then(() => {
-              router.push('/auth-page-static');
-              // router.push('/auth-page-ssr');
+              // router.push('/auth-page-static');
+              router.push('/auth-page-ssr');
             })
-            .catch((err) => {
+            .catch(err => {
               console.error(err);
               console.log('Usuário ou senha estão inválidos');
             });

@@ -3,16 +3,14 @@ import React from 'react';
 import { authService } from './authService';
 
 export function withSession(fn) {
-  return async (ctx) => {
+  return async ctx => {
     try {
       const session = await authService.getSession(ctx);
       const modifiedCtx = {
         ...ctx,
         req: {
           ...ctx.req,
-          session: {
-            name: 'Nome do usuário',
-          },
+          session,
         },
       };
       return fn(modifiedCtx);
@@ -35,10 +33,10 @@ export function useSession() {
   React.useEffect(() => {
     authService
       .getSession()
-      .then((userSession) => {
+      .then(userSession => {
         setSession(userSession);
       })
-      .catch((err) => {
+      .catch(err => {
         setError(err);
       })
       .finally(() => {
