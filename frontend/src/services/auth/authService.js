@@ -35,6 +35,7 @@ export const authService = {
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      refresh: true,
     }).then(res => {
       if (!res.ok) throw new Error('Não autorizado');
       return res.body.data;
